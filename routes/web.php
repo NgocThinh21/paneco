@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\ProjectController;
-
+use App\Http\Controllers\Admin\CompanyInfoController;
 
 
 // Khi có người truy cập trang chủ, gọi hàm index trong HomeController
@@ -16,6 +16,9 @@ Route::get('/login', function () {
     return view('login.login');
 });
 
+Route::get('/dashboard', function () {
+    return view('login.login');
+});
 
 
 
@@ -24,8 +27,9 @@ Route::get('/login', function () {
 
 //ADMIN
 
-Route::prefix('admin')->group(function () {
-    Route::resource('info', ProjectController::class);
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('/info', [CompanyInfoController::class, 'edit'])->name('company-info.edit');
+    Route::put('/info', [CompanyInfoController::class, 'update'])->name('company-info.update');
 });
 Route::prefix('admin')->group(function () {
     Route::resource('projects', ProjectController::class);
