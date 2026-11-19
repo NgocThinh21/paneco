@@ -16,9 +16,6 @@ Route::get('/login', function () {
     return view('login.login');
 });
 
-Route::get('/dashboard', function () {
-    return view('login.login');
-});
 
 
 
@@ -27,10 +24,14 @@ Route::get('/dashboard', function () {
 
 //ADMIN
 
+
+//trang chủ
 Route::prefix('admin')->name('admin.')->group(function () {
-    Route::get('/info', [CompanyInfoController::class, 'edit'])->name('company-info.edit');
-    Route::put('/info', [CompanyInfoController::class, 'update'])->name('company-info.update');
+    Route::get('/info', [CompanyInfoController::class, 'index'])->name('info.index');
+    Route::put('/info', [CompanyInfoController::class, 'update'])->name('info.update');
 });
+
+// trang projects
 Route::prefix('admin')->group(function () {
     Route::resource('projects', ProjectController::class);
 });

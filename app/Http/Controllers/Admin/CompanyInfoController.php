@@ -5,67 +5,51 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\CompanyInfo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class CompanyInfoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    // public function index()
-    // {
-    //      $info = CompanyInfo::latest()->get();
-    //     return view('admin.info.index', compact('info'));
-    // }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    // public function create()
-    // {
-    //     //
-    // }
-
-    // /**
-    //  * Store a newly created resource in storage.
-    //  */
-    // public function store(Request $request)
-    // {
-    //     //
-    // }
-
-    // /**
-    //  * Display the specified resource.
-    //  */
-    // public function show(string $id)
-    // {
-    //     //
-    // }
-
-    // /**
-    //  * Show the form for editing the specified resource.
-    //  */
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit()
+    public function index()
     {
         $info = CompanyInfo::first() ?? new CompanyInfo();
         return view('admin.info.index', compact('info'));
     }
 
-    // /**
-    //  * Update the specified resource in storage.
-    //  */
-    public function update(Request $request, string $id)
+    public function update(Request $request)
     {
-        //
-    }
+        $data = $request->validate([
+            'hero_badge'        => 'nullable|string|max:255',
+            'hero_title'        => 'nullable|string',
+            'hero_subtitle'     => 'nullable|string',
+            'about_subtitle'    => 'nullable|string|max:255',
+            'company_name'      => 'nullable|string|max:255',
+            'about_description' => 'nullable|string',
+            'vision'            => 'nullable|string',
+            'english_name'      => 'nullable|string|max:255',
+            'tax_code'          => 'nullable|string|max:50',
+            'representative'    => 'nullable|string|max:255',
+            'hq_address'        => 'nullable|string|max:255',
+            'branch_address'    => 'nullable|string|max:255',
+            'hotline'           => 'nullable|string|max:100',
+            'email'             => 'nullable|email|max:255',
+            'about_image'       => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
+        ]);
 
-    // /**
-    //  * Remove the specified resource from storage.
-    //  */
-    // public function destroy(string $id)
-    // {
-    //     //
-    // }
+        $info = CompanyInfo::first();
+
+        if ($request->hasFile('about_image')) {
+            if ($info && $info->about_image) {
+                Storage::disk('public')->delete($info->about_image);
+            }
+            $data['about_image'] = $request->file('about_image')->store('company', 'public');
+        }
+
+        if ($info && $info->exists) {
+            $info->update($data);
+        } else {
+            CompanyInfo::create($data);
+        }
+
+        return redirect()->route('admin.info.index')->with('success', 'Đã lưu thông tin trang chủ thành công!');
+    }
 }

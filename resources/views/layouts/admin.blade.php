@@ -65,24 +65,24 @@
             </nav> -->
             <nav class="mt-4 px-3 space-y-1">
     <!-- Tổng quan -->
-    <a href="/admin/dashboard" class="flex items-center px-3 py-2.5 text-sm font-medium rounded-lg transition {{ request()->is('admin/dashboard') ? 'bg-navyLight text-gold' : 'text-gray-300 hover:bg-navyLight hover:text-white' }}">
+    <!-- <a href="/admin/dashboard" class="flex items-center px-3 py-2.5 text-sm font-medium rounded-lg transition {{ request()->is('admin/dashboard') ? 'bg-navyLight text-gold' : 'text-gray-300 hover:bg-navyLight hover:text-white' }}">
         <i class="fas fa-chart-line w-6"></i> Tổng quan
-    </a>
+    </a> -->
 
     <!-- Thông tin công ty -->
-    <a href="/admin/company-info" class="flex items-center px-3 py-2.5 text-sm font-medium rounded-lg transition {{ request()->is('admin/company-info*') ? 'bg-navyLight text-gold' : 'text-gray-300 hover:bg-navyLight hover:text-white' }}">
+    <a href="/admin/info" class="flex items-center px-3 py-2.5 text-sm font-medium rounded-lg transition {{ request()->is('admin/info*') ? 'bg-navyLight text-gold' : 'text-gray-300 hover:bg-navyLight hover:text-white' }}">
         <i class="fas fa-building w-6"></i> Thông tin công ty
     </a>
 
     <!-- Dự án (Thép & BIM) -->
     <a href="/admin/projects" class="flex items-center px-3 py-2.5 text-sm font-medium rounded-lg transition {{ request()->is('admin/projects*') ? 'bg-navyLight text-gold' : 'text-gray-300 hover:bg-navyLight hover:text-white' }}">
-        <i class="fas fa-project-diagram w-6"></i> Dự án (Thép & BIM)
+        <i class="fas fa-project-diagram w-6"></i> Các dự án 
     </a>
 
     <!-- Dịch vụ & Phần mềm -->
-    <a href="/admin/services" class="flex items-center px-3 py-2.5 text-sm font-medium rounded-lg transition {{ request()->is('admin/services*') ? 'bg-navyLight text-gold' : 'text-gray-300 hover:bg-navyLight hover:text-white' }}">
+    <!-- <a href="/admin/services" class="flex items-center px-3 py-2.5 text-sm font-medium rounded-lg transition {{ request()->is('admin/services*') ? 'bg-navyLight text-gold' : 'text-gray-300 hover:bg-navyLight hover:text-white' }}">
         <i class="fas fa-cogs w-6"></i> Dịch vụ & Phần mềm
-    </a>
+    </a> -->
 
     <!-- Tuyển dụng -->
     <a href="/admin/recruitments" class="flex items-center px-3 py-2.5 text-sm font-medium rounded-lg transition {{ request()->is('admin/recruitments*') ? 'bg-navyLight text-gold' : 'text-gray-300 hover:bg-navyLight hover:text-white' }}">
@@ -90,9 +90,9 @@
     </a>
 
     <!-- Tin tức & Sự kiện -->
-    <a href="/admin/news" class="flex items-center px-3 py-2.5 text-sm font-medium rounded-lg transition {{ request()->is('admin/news*') ? 'bg-navyLight text-gold' : 'text-gray-300 hover:bg-navyLight hover:text-white' }}">
+    <!-- <a href="/admin/news" class="flex items-center px-3 py-2.5 text-sm font-medium rounded-lg transition {{ request()->is('admin/news*') ? 'bg-navyLight text-gold' : 'text-gray-300 hover:bg-navyLight hover:text-white' }}">
         <i class="fas fa-newspaper w-6"></i> Tin tức & Sự kiện
-    </a>
+    </a> -->
 
     <!-- Đối tác Nhật Bản -->
     <a href="/admin/partners" class="flex items-center px-3 py-2.5 text-sm font-medium rounded-lg transition {{ request()->is('admin/partners*') ? 'bg-navyLight text-gold' : 'text-gray-300 hover:bg-navyLight hover:text-white' }}">
@@ -100,11 +100,11 @@
     </a>
 
     <!-- Hòm thư liên hệ -->
-    <a href="/admin/contacts" class="flex items-center px-3 py-2.5 text-sm font-medium rounded-lg transition justify-between {{ request()->is('admin/contacts*') ? 'bg-navyLight text-gold' : 'text-gray-300 hover:bg-navyLight hover:text-white' }}">
+    <!-- <a href="/admin/contacts" class="flex items-center px-3 py-2.5 text-sm font-medium rounded-lg transition justify-between {{ request()->is('admin/contacts*') ? 'bg-navyLight text-gold' : 'text-gray-300 hover:bg-navyLight hover:text-white' }}">
         <div class="flex items-center">
             <i class="fas fa-envelope w-6"></i> Hòm thư liên hệ
-        </div>
-        <span class="bg-gold text-navy text-xs font-bold px-2 py-0.5 rounded-full">Mới</span>
+        </div> -->
+        <!-- <span class="bg-gold text-navy text-xs font-bold px-2 py-0.5 rounded-full">Mới</span> -->
     </a>
 </nav>
         </div>

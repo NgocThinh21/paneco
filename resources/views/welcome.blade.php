@@ -328,7 +328,7 @@
                     </p>
                     <div class="d-flex flex-wrap gap-3">
                         <a href="#projects" class="btn btn-amber"><i class="bi bi-grid-3x3-gap-fill me-2"></i>Xem Công Trình Đã Làm</a>
-                        <a href="#contact" class="btn btn-outline-light px-4 py-2 fw-semibold d-flex align-items-center">Hợp Tác & Báo Giá</a>
+                        <!-- <a href="#contact" class="btn btn-outline-light px-4 py-2 fw-semibold d-flex align-items-center">Hợp Tác & Báo Giá</a> -->
                     </div>
                 </div>
             </div>
@@ -485,9 +485,9 @@
 
             <!-- Thanh Filter -->
             <div class="text-center mb-5">
-                <button class="filter-btn active" data-filter="all">Tất cả dự án</button>
-                <button class="filter-btn" data-filter="steel">Kết cấu thép (Nhật Bản)</button>
-                <button class="filter-btn" data-filter="bim">Thiết kế & Thi công BIM</button>
+                <!-- <button class="filter-btn active" data-filter="all">Tất cả dự án</button> -->
+                <!-- <button class="filter-btn" data-filter="steel">Kết cấu thép (Nhật Bản)</button>
+                <button class="filter-btn" data-filter="bim">Thiết kế & Thi công BIM</button> -->
             </div>
 
             <!-- Lưới Dự Án -->
@@ -598,11 +598,11 @@
     </section>
 
     <!-- 7. TUYỂN DỤNG & TIN TỨC -->
-    <section id="recruitment" class="bg-light">
+    <!-- <section id="recruitment" class="bg-light">
         <div class="container">
-            <div class="row g-5">
+            <div class="row g-5"> -->
                 <!-- Cột Tuyển dụng -->
-                <div class="col-lg-7">
+                <!-- <div class="col-lg-7">
                     <h2 class="section-title section-title-left mb-4">THÔNG TIN TUYỂN DỤNG</h2>
                     
                     <div class="job-card">
@@ -624,10 +624,10 @@
                         <p class="small mb-3">Dựng mô hình BIM 3D kiến trúc, kết cấu, kiểm tra xung đột và xuất hồ sơ kỹ thuật theo tiêu chuẩn quốc tế.</p>
                         <a href="#contact" class="btn btn-sm btn-outline-primary fw-semibold">Ứng tuyển vị trí này <i class="bi bi-arrow-right"></i></a>
                     </div>
-                </div>
+                </div> -->
 
                 <!-- Cột Tin tức & Đối tác -->
-                <div class="col-lg-5" id="news">
+                <!-- <div class="col-lg-5" id="news">
                     <h2 class="section-title section-title-left mb-4">TIN TỨC & ĐỐI TÁC</h2>
                     <div class="card border-0 shadow-sm mb-3">
                         <div class="card-body">
@@ -642,10 +642,10 @@
                             <h6 class="fw-bold mt-1">Ứng dụng quy trình kiểm tra tự động trên S/F REAL4 giúp giảm 30% sai số</h6>
                             <p class="text-muted small mb-0">Nâng cao độ chính xác tuyệt đối cho các cấu kiện dầm, cột phức tạp...</p>
                         </div>
-                    </div>
+                    </div> -->
 
                     <!-- Đối tác tiêu biểu -->
-                    <div class="bg-white p-3 rounded-3 shadow-sm">
+                    <!-- <div class="bg-white p-3 rounded-3 shadow-sm">
                         <h6 class="fw-bold text-secondary mb-3">Đối tác & Khách hàng tiêu biểu</h6>
                         <div class="d-flex flex-wrap gap-2">
                             <span class="badge bg-light text-dark border p-2">Nippon Steel</span>
@@ -654,11 +654,11 @@
                             <span class="badge bg-light text-dark border p-2">Toyota Industries</span>
                             <span class="badge bg-light text-dark border p-2">Equinix Japan</span>
                         </div>
-                    </div>
-                </div>
+                    </div> -->
+                <!-- </div>
             </div>
         </div>
-    </section>
+    </section> -->
 
     <!-- 8. LIÊN HỆ & GỬI THÔNG TIN -->
     <section id="contact">
@@ -697,9 +697,26 @@
                 </div>
 
                 <!-- Form Liên Hệ (Sẽ kết nối vào bảng contacts trong Laravel) -->
-                <div class="col-lg-7">
+                 <div class="col-lg-7">
+                    <div class="card border-0 shadow-sm p-3 rounded-4 h-100" style="min-height: 430px;">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15675.570526490641!2d106.76316535352963!3d10.819528052137057!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3175279d3187379d%3A0x9896ce5983e4c194!2zS2h1IOG6qW0gdGjhu7FjIHNpbmggdGjDoWkgU2VuIE5hbSBC4buZ!5e0!3m2!1svi!2sus!4v1795054631799!5m2!1svi!2sus" 
+                            width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin">
+                        </iframe>
+                    </div>
+                </div>
+                <!-- <div class="col-lg-7">
                     <div class="card border-0 shadow-sm p-4 rounded-4">
-                        <form id="contactForm">
+                       <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-3 flex flex-col justify-between h-full min-h-[430px]">
+                            <iframe
+                                src="https://www.google.com/maps/embed?pb=YOUR_EMBED_LINK_HERE"
+                                class="w-full flex-1 min-h-[400px] rounded-xl border-0"
+                                style="width: 100%; height: 100%;"
+                                allowfullscreen=""
+                                loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade">
+                            </iframe>
+                        </div> -->
+                        <!-- <form id="contactForm">
                             <div class="row g-3">
                                 <div class="col-md-6">
                                     <label class="form-label fw-semibold">Họ và tên *</label>
@@ -731,10 +748,10 @@
                                     </button>
                                 </div>
                             </div>
-                        </form>
-                        <div id="formAlert" class="alert alert-success mt-3 d-none" role="alert">
+                        </form> -->
+                        <!-- <div id="formAlert" class="alert alert-success mt-3 d-none" role="alert">
                             <i class="bi bi-check-circle-fill me-2"></i>Cảm ơn bạn! Thông tin đã được ghi nhận, bộ phận kỹ thuật PANECO sẽ liên hệ lại sớm nhất.
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
