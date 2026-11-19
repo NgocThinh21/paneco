@@ -22,16 +22,16 @@ Route::get('/login', function () {
 
 
 
-//Admin
+//ADMIN
 
 
 //trang chủ
-Route::prefix('Admin')->name('Admin.')->group(function () {
+Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/info', [CompanyInfoController::class, 'index'])->name('info.index');
     Route::put('/info', [CompanyInfoController::class, 'update'])->name('info.update');
 });
 
 // trang projects
-Route::prefix('Admin')->group(function () {
+Route::prefix('admin')->group(function () {
     Route::resource('projects', ProjectController::class);
 });
