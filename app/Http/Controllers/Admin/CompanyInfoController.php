@@ -12,7 +12,7 @@ class CompanyInfoController extends Controller
     public function index()
     {
         $info = CompanyInfo::first() ?? new CompanyInfo();
-        return view('admin.info.index', compact('info'));
+        return view('Admin.info.index', compact('info'));
     }
 
     public function update(Request $request)
@@ -50,6 +50,6 @@ class CompanyInfoController extends Controller
             CompanyInfo::create($data);
         }
 
-        return redirect()->route('admin.info.index')->with('success', 'Đã lưu thông tin trang chủ thành công!');
+        return redirect()->route('Admin.info.index')->with('success', 'Đã lưu thông tin trang chủ thành công!');
     }
 }
