@@ -36,7 +36,7 @@
             <!-- Menu Điều hướng -->
             <nav class="mt-4 px-3 space-y-1">
                 <a href="/admin/dashboard" class="flex items-center px-3 py-2.5 text-sm font-medium rounded-lg bg-navyLight text-gold">
-                    <i class="fas fa-chart-line w-6"></i> Tổng quan
+                    <i class="fas fa-chart-line w-6"></i> BANNER
                 </a>
                 <a href="/admin/company-info" class="flex items-center px-3 py-2.5 text-sm font-medium rounded-lg text-gray-300 hover:bg-navyLight hover:text-white transition">
                     <i class="fas fa-building w-6"></i> Thông tin công ty

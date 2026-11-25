@@ -317,6 +317,7 @@
     @include('layouts.header')
 
     <!-- 2. HERO BANNER -->
+
     <section id="home" class="hero-section">
         <div class="container">
             <div class="row align-items-center">
@@ -328,7 +329,7 @@
                     </p>
                     <div class="d-flex flex-wrap gap-3">
                         <a href="#projects" class="btn btn-amber"><i class="bi bi-grid-3x3-gap-fill me-2"></i>Xem Công Trình Đã Làm</a>
-                        <a href="#contact" class="btn btn-outline-light px-4 py-2 fw-semibold d-flex align-items-center">Hợp Tác & Báo Giá</a>
+                        <!-- <a href="#contact" class="btn btn-outline-light px-4 py-2 fw-semibold d-flex align-items-center">Hợp Tác & Báo Giá</a> -->
                     </div>
                 </div>
             </div>

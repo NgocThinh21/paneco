@@ -3,30 +3,20 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\ProjectController;
+use App\Http\Controllers\Admin\CompanyInfoController;
+use App\Http\Controllers\Admin\BannerController;
 
-
-
-// Khi có người truy cập trang chủ, gọi hàm index trong HomeController
+// Trang chủ
 Route::get('/', [HomeController::class, 'index']);
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });// đầu tiên  local sẽ chạy trang này trước
+// Đăng nhập (tạm thời, sẽ làm xử lý đăng nhập sau)
 Route::get('/login', function () {
     return view('login.login');
 });
 
-
-
-
-
-
-
-//ADMIN
-
-Route::prefix('admin')->group(function () {
-    Route::resource('info', ProjectController::class);
-});
-Route::prefix('admin')->group(function () {
+// ADMIN
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::resource('info', CompanyInfoController::class);
     Route::resource('projects', ProjectController::class);
+    Route::resource('banners', BannerController::class)->only(['index', 'store', 'destroy']);
 });

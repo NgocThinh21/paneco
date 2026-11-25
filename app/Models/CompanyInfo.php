@@ -6,15 +6,28 @@ use Illuminate\Database\Eloquent\Model;
 
 class CompanyInfo extends Model
 {
-    // Khai báo các cột được phép thêm/sửa dữ liệu
+    protected $table = 'company_infos';
+
     protected $fillable = [
-        'company_name',
+        'name_vi',
+        'name_en',
         'tax_code',
-        'address_hcmc',
-        'address_phanrang',
-        'phone_1',
+        'founded_date',
+        'charter_capital',
+        'legal_representative',
+        'phone',
         'phone_2',
-        'email', 
-        'greeting'
+        'email',
+        'slogan',
+        'greeting',
+        'vision',
+        'mission',
+        'logo',
+        'about_image',
+        'zalo_link',
+    ];
+
+    protected $casts = [
+        'founded_date' => 'date',
     ];
 }
