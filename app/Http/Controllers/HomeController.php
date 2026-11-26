@@ -22,7 +22,12 @@ class HomeController extends Controller
             ->latest()
             ->take(6)
             ->get();
+        $heroHighlights = \App\Models\HeroHighlight::where('is_active', true)
+            ->orderBy('sort_order')
+            ->get();
 
-        return view('welcome', compact('info', 'banners', 'featuredProjects'));
+        return view('welcome', compact('info', 'banners', 'heroHighlights', 'featuredProjects'));
+        // return view('welcome', compact('info', 'banners', 'featuredProjects'));
     }
 }
+

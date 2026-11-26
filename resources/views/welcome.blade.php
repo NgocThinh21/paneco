@@ -317,27 +317,61 @@
     @include('layouts.header')
 
     <!-- 2. HERO BANNER -->
-
-    <section id="home" class="hero-section">
+     @php
+        $hero = $banners->first();
+    @endphp
+    
+    @if($hero)
+    <section id="home" class="hero-section"style="background: linear-gradient(135deg, rgba(10, 37, 64, 0.92), rgba(27, 54, 93, 0.85)), 
+    { storage/app/public/banners/$hero->image }}
+      center/cover;">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-8">
-                    <span class="hero-badge"><i class="bi bi-patch-check-fill me-1"></i> THÀNH LẬP TỪ 07/06/2018 • CHUẨN KỸ THUẬT NHẬT BẢN</span>
-                    <h1 class="hero-title">Chúng tôi hỗ trợ công nghệ xây dựng Nhật Bản từ Việt Nam</h1>
+                    @if($hero->badge_text)
+                        <span class="hero-badge"><i class="bi bi-patch-check-fill me-1"></i> {{ $hero->badge_text }}</span>
+                    @endif
+                    <h1 class="hero-title">{{ $hero->title }}</h1>
+                    <p class="hero-subtitle">
+                        {{ $hero->description }}</p>
+                    <div class="d-flex flex-wrap gap-3">
+                        <a href="{{ $hero->button1_link }}" class="btn btn-amber"><i class="bi bi-grid-3x3-gap-fill me-2"></i>{{ $hero->button1_text }}</a>
+                    <!-- <span class="hero-badge"><i class="bi bi-patch-check-fill me-1"></i> THÀNH LẬP TỪ 07/06/2018 • CHUẨN KỸ THUẬT NHẬT BẢN</span> -->
+                    <!-- <h1 class="hero-title">Chúng tôi hỗ trợ công nghệ xây dựng Nhật Bản từ Việt Nam</h1>
                     <p class="hero-subtitle">
                         Công ty TNHH PANECO Việt Nam chuyên sâu triển khai bản vẽ chi tiết kết cấu thép (Shop Drawing), thiết kế và thi công BIM cho các công trình dân dụng & công nghiệp tại Nhật Bản và Việt Nam.
                     </p>
                     <div class="d-flex flex-wrap gap-3">
-                        <a href="#projects" class="btn btn-amber"><i class="bi bi-grid-3x3-gap-fill me-2"></i>Xem Công Trình Đã Làm</a>
+                        <a href="#projects" class="btn btn-amber"><i class="bi bi-grid-3x3-gap-fill me-2"></i>Xem Công Trình Đã Làm</a> -->
                         <!-- <a href="#contact" class="btn btn-outline-light px-4 py-2 fw-semibold d-flex align-items-center">Hợp Tác & Báo Giá</a> -->
                     </div>
                 </div>
             </div>
         </div>
     </section>
+    @endif
 
     <!-- 3. GIÁ TRỊ CỐT LÕI (3 CỘT) -->
-    <section class="py-5 bg-light" style="margin-top: -40px; position: relative; z-index: 2; background: transparent !important;">
+     @if($heroHighlights->count())
+    <div class="col-lg-4 mt-4 mt-lg-0">
+        <div class="d-flex flex-column gap-3">
+            @foreach($heroHighlights as $item)
+                <div class="p-3 rounded-3" style="background: rgba(255,255,255,0.1); backdrop-filter: blur(6px); border: 1px solid rgba(255,255,255,0.15);">
+                    <div class="d-flex align-items-center gap-3">
+                        <i class="{{ $item->icon }} fs-3 text-warning"></i>
+                        <div>
+                            <div class="fw-bold text-white">{{ $item->title }}</div>
+                            @if($item->subtitle)
+                                <div class="small text-white-50">{{ $item->subtitle }}</div>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    </div>
+@endif
+    <!-- <section class="py-5 bg-light" style="margin-top: -40px; position: relative; z-index: 2; background: transparent !important;">
         <div class="container">
             <div class="row g-4">
                 <div class="col-md-4">
@@ -363,7 +397,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
 
     <!-- 4. GIỚI THIỆU CÔNG TY -->
     <section id="about">

@@ -69,13 +69,13 @@
             <div>
                 <label style="font-weight: bold;">Thứ tự hiển thị:</label>
                 <input type="number" name="sort_order" value="{{ old('sort_order', 0) }}" min="0" style="width: 80px; padding: 6px;">
-            </div>
+            </div>-->
 
             <label style="display: inline-flex; align-items: center; gap: 6px; font-weight: bold;">
                 <input type="checkbox" name="is_active" value="1" {{ old('is_active', 1) ? 'checked' : '' }}>
                 Hiển thị trên trang chủ
             </label>
-        </div> -->
+        </div> 
 
         <button type="submit" style="padding: 8px 18px; cursor: pointer;">Lưu Banner</button>
     </form>
