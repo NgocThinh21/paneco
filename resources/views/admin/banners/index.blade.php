@@ -1,132 +1,376 @@
 @extends('layouts.admin')
 
+@section('title', 'Quản lý Banner trang chủ')
+
 @section('content')
-<div style="padding: 20px; max-width: 1050px;">
-    <h2>Quản lý Banner trang chủ</h2>
+@php
+    $isEdit = isset($editingBanner) && $editingBanner;
+@endphp
 
+<style>
+    .bn-wrap {
+        max-width: 1120px;
+    }
+    .bn-title {
+        font-size: 20px;
+        font-weight: 700;
+        color: #0f172a;
+        margin-bottom: 16px;
+    }
+    .bn-card {
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 10px;
+        padding: 22px;
+        margin-bottom: 22px;
+        box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+    }
+    .bn-card-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 16px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #f1f5f9;
+    }
+    .bn-card-head h5 {
+        margin: 0;
+        font-size: 16px;
+        font-weight: 700;
+        color: #0f172a;
+    }
+    .bn-group {
+        margin-bottom: 14px;
+    }
+    .bn-grid-2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        margin-bottom: 14px;
+    }
+    @media (max-width: 768px) {
+        .bn-grid-2 {
+            grid-template-columns: 1fr;
+        }
+    }
+    .bn-label {
+        display: block;
+        font-size: 13px;
+        font-weight: 600;
+        color: #1e293b;
+        margin-bottom: 6px;
+    }
+    .bn-input,
+    .bn-textarea {
+        width: 100%;
+        padding: 10px 12px;
+        border: 1px solid #cbd5e1;
+        border-radius: 6px;
+        font-size: 14px;
+        color: #0f172a;
+        background: #ffffff;
+        box-sizing: border-box;
+    }
+    .bn-textarea {
+        min-height: 95px;
+        resize: vertical;
+    }
+    .bn-input:focus,
+    .bn-textarea:focus {
+        outline: none;
+        border-color: #0a2540;
+        box-shadow: 0 0 0 3px rgba(10, 37, 64, 0.12);
+    }
+    .bn-check {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 14px;
+        font-weight: 500;
+        color: #1e293b;
+        margin-top: 24px;
+        cursor: pointer;
+    }
+    .bn-btn-primary {
+        background: #0a2540;
+        color: #ffffff;
+        border: none;
+        border-radius: 6px;
+        padding: 10px 20px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+    }
+    .bn-btn-primary:hover {
+        background: #1b365d;
+    }
+    .bn-btn-cancel {
+        display: inline-block;
+        padding: 6px 12px;
+        font-size: 13px;
+        font-weight: 600;
+        color: #475569;
+        background: #f1f5f9;
+        border: 1px solid #cbd5e1;
+        border-radius: 6px;
+        text-decoration: none;
+    }
+    .bn-btn-edit {
+        display: inline-block;
+        padding: 5px 11px;
+        font-size: 12px;
+        font-weight: 600;
+        color: #0a2540;
+        background: #eff6ff;
+        border: 1px solid #93c5fd;
+        border-radius: 6px;
+        text-decoration: none;
+    }
+    .bn-btn-del {
+        padding: 5px 11px;
+        font-size: 12px;
+        font-weight: 600;
+        color: #dc2626;
+        background: #ffffff;
+        border: 1px solid #fca5a5;
+        border-radius: 6px;
+        cursor: pointer;
+    }
+    .bn-actions {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+    }
+    .bn-alert-ok {
+        background: #dcfce7;
+        border: 1px solid #86efac;
+        color: #166534;
+        padding: 12px 16px;
+        border-radius: 8px;
+        margin-bottom: 16px;
+        font-weight: 500;
+    }
+    .bn-alert-err {
+        background: #fee2e2;
+        border: 1px solid #fca5a5;
+        color: #991b1b;
+        padding: 12px 16px;
+        border-radius: 8px;
+        margin-bottom: 16px;
+    }
+    .bn-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 14px;
+    }
+    .bn-table th {
+        text-align: left;
+        padding: 12px;
+        background: #f8fafc;
+        color: #0f172a;
+        font-weight: 700;
+        border-bottom: 2px solid #e2e8f0;
+    }
+    .bn-table td {
+        padding: 12px;
+        color: #334155;
+        border-bottom: 1px solid #e2e8f0;
+        vertical-align: middle;
+    }
+    .bn-badge-on {
+        display: inline-block;
+        padding: 4px 10px;
+        border-radius: 999px;
+        font-size: 12px;
+        font-weight: 600;
+        background: #dcfce7;
+        color: #166534;
+    }
+    .bn-badge-off {
+        display: inline-block;
+        padding: 4px 10px;
+        border-radius: 999px;
+        font-size: 12px;
+        font-weight: 600;
+        background: #f1f5f9;
+        color: #475569;
+    }
+</style>
+
+<div class="bn-wrap">
+    <h2 class="bn-title">Quản lý Banner trang chủ</h2>
+//Thông báo thành công
     @if(session('success'))
-        <div style="padding: 10px 14px; margin-bottom: 16px; background: #e8f5e9; color: #1b5e20; border: 1px solid #a5d6a7;">
-            {{ session('success') }}
-        </div>
+        <div class="bn-alert-ok">{{ session('success') }}</div>
     @endif
-
+//Thông báo thất bại
     @if($errors->any())
-        <div style="padding: 10px 14px; margin-bottom: 16px; background: #ffebee; color: #b71c1c; border: 1px solid #ef9a9a;">
-            <ul style="margin: 0; padding-left: 18px;">
-                @foreach($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
+        <div class="bn-alert-err">
+            @foreach($errors->all() as $error)
+                <div>• {{ $error }}</div>
+            @endforeach
         </div>
     @endif
 
-    <form action="{{ route('admin.banners.store') }}" method="POST" enctype="multipart/form-data" style="margin-bottom: 28px; padding: 16px; border: 1px solid #ddd;">
-        @csrf
-
-        <div style="margin-bottom: 12px;">
-            <label style="display: block; font-weight: bold; margin-bottom: 4px;">Badge nhỏ phía trên tiêu đề</label>
-            <input type="text" name="badge_text" value="{{ old('badge_text') }}" placeholder="VD: THÀNH LẬP TỪ 07/06/2018 · CHUẨN KỸ THUẬT NHẬT BẢN" style="width: 100%; padding: 8px;">
+    <div class="bn-card">
+        <div class="bn-card-head">
+            <h5>{{ $isEdit ? 'Sửa Banner #' . $editingBanner->id : 'Thêm Banner mới' }}</h5>
+            @if($isEdit)
+                <a href="{{ route('admin.banners.index') }}" class="bn-btn-cancel">Hủy sửa</a>
+            @endif
         </div>
 
-        <div style="margin-bottom: 12px;">
-            <label style="display: block; font-weight: bold; margin-bottom: 4px;">Tiêu đề chính (*)</label>
-            <input type="text" name="title" value="{{ old('title') }}" required placeholder="VD: Chúng tôi hỗ trợ công nghệ xây dựng Nhật Bản từ Việt Nam" style="width: 100%; padding: 8px;">
-        </div>
+        <form
+            action="{{ $isEdit ? route('admin.banners.update', $editingBanner) : route('admin.banners.store') }}"
+            method="POST"
+            enctype="multipart/form-data"
+        >
+            @csrf
+            @if($isEdit)
+                @method('PUT')
+            @endif
 
-        <div style="margin-bottom: 12px;">
-            <label style="display: block; font-weight: bold; margin-bottom: 4px;">Mô tả ngắn</label>
-            <textarea name="description" rows="3" placeholder="Mô tả chi tiết hiển thị trên banner..." style="width: 100%; padding: 8px;">{{ old('description') }}</textarea>
-        </div>
-
-        <div style="margin-bottom: 12px;">
-            <label style="display: block; font-weight: bold; margin-bottom: 4px;">Ảnh nền Banner</label>
-            <input type="file" name="image" accept="image/*">
-        </div>
-
-        <div style="display: flex; gap: 12px; margin-bottom: 12px; flex-wrap: wrap;">
-            <div style="flex: 1; min-width: 220px;">
-                <label style="display: block; font-weight: bold; margin-bottom: 4px;">Chữ nút 1</label>
-                <input type="text" name="button1_text" value="{{ old('button1_text') }}" placeholder="VD: Xem Công Trình Đã Làm" style="width: 100%; padding: 8px;">
+            <div class="bn-group">
+                <label class="bn-label">Badge nhỏ phía trên tiêu đề</label>
+                <input type="text" name="badge_text" class="bn-input"
+                       value="{{ old('badge_text', $isEdit ? $editingBanner->badge_text : '') }}"
+                       placeholder="VD: THÀNH LẬP TỪ 07/06/2018 • CHUẨN KỸ THUẬT NHẬT BẢN">
             </div>
-            <div style="flex: 1; min-width: 220px;">
-                <label style="display: block; font-weight: bold; margin-bottom: 4px;">Link nút 1</label>
-                <input type="text" name="button1_link" value="{{ old('button1_link') }}" placeholder="VD: #projects hoặc /projects" style="width: 100%; padding: 8px;">
+
+            <div class="bn-group">
+                <label class="bn-label">Tiêu đề chính (*)</label>
+                <input type="text" name="title" class="bn-input" required
+                       value="{{ old('title', $isEdit ? $editingBanner->title : '') }}"
+                       placeholder="VD: Chúng tôi hỗ trợ công nghệ xây dựng Nhật Bản từ Việt Nam">
             </div>
-        </div>
 
-        <!-- <div style="display: flex; gap: 12px; margin-bottom: 12px; flex-wrap: wrap;">
-            <div style="flex: 1; min-width: 220px;">
-                <label style="display: block; font-weight: bold; margin-bottom: 4px;">Chữ nút 2</label>
-                <input type="text" name="button2_text" value="{{ old('button2_text') }}" placeholder="VD: Hợp Tác & Báo Giá" style="width: 100%; padding: 8px;">
+            <div class="bn-group">
+                <label class="bn-label">Mô tả ngắn</label>
+                <textarea name="description" class="bn-textarea"
+                          placeholder="Mô tả chi tiết hiển thị trên banner...">{{ old('description', $isEdit ? $editingBanner->description : '') }}</textarea>
             </div>
-            <div style="flex: 1; min-width: 220px;">
-                <label style="display: block; font-weight: bold; margin-bottom: 4px;">Link nút 2</label>
-                <input type="text" name="button2_link" value="{{ old('button2_link') }}" placeholder="VD: #contact hoặc /contact" style="width: 100%; padding: 8px;">
+
+            <div class="bn-group">
+                <label class="bn-label">Ảnh nền Banner</label>
+                <input type="file" name="image" accept="image/*">
+                @if($isEdit && $editingBanner->image)
+                    <div style="margin-top: 10px;">
+                        <img src="{{ asset('storage/' . $editingBanner->image) }}" alt="{{ $editingBanner->title }}"
+                             style="width: 130px; height: 78px; object-fit: cover; border-radius: 6px; border: 1px solid #cbd5e1;">
+                        <div style="font-size: 12px; color: #64748b; margin-top: 4px;">Ảnh hiện tại (bỏ trống nếu giữ nguyên ảnh này).</div>
+                    </div>
+                @endif
             </div>
-        </div>
 
-        <div style="display: flex; align-items: center; gap: 20px; margin-bottom: 16px;">
-            <div>
-                <label style="font-weight: bold;">Thứ tự hiển thị:</label>
-                <input type="number" name="sort_order" value="{{ old('sort_order', 0) }}" min="0" style="width: 80px; padding: 6px;">
-            </div>-->
+            <div class="bn-grid-2">
+                <div>
+                    <label class="bn-label">Chữ nút 1</label>
+                    <input type="text" name="button1_text" class="bn-input"
+                           value="{{ old('button1_text', $isEdit ? $editingBanner->button1_text : '') }}"
+                           placeholder="VD: Xem Công Trình Đã Làm">
+                </div>
+                <div>
+                    <label class="bn-label">Link nút 1</label>
+                    <input type="text" name="button1_link" class="bn-input"
+                           value="{{ old('button1_link', $isEdit ? $editingBanner->button1_link : '') }}"
+                           placeholder="VD: #projects hoặc /projects">
+                </div>
+            </div>
 
-            <label style="display: inline-flex; align-items: center; gap: 6px; font-weight: bold;">
-                <input type="checkbox" name="is_active" value="1" {{ old('is_active', 1) ? 'checked' : '' }}>
-                Hiển thị trên trang chủ
-            </label>
-        </div> 
+            <div class="bn-grid-2">
+                <div>
+                    <label class="bn-label">Chữ nút 2</label>
+                    <input type="text" name="button2_text" class="bn-input"
+                           value="{{ old('button2_text', $isEdit ? $editingBanner->button2_text : '') }}"
+                           placeholder="VD: Hợp Tác & Báo Giá">
+                </div>
+                <div>
+                    <label class="bn-label">Link nút 2</label>
+                    <input type="text" name="button2_link" class="bn-input"
+                           value="{{ old('button2_link', $isEdit ? $editingBanner->button2_link : '') }}"
+                           placeholder="VD: #contact">
+                </div>
+            </div>
 
-        <button type="submit" style="padding: 8px 18px; cursor: pointer;">Lưu Banner</button>
-    </form>
+            <div class="bn-grid-2">
+                <div>
+                    <label class="bn-label">Thứ tự</label>
+                    <input type="number" name="sort_order" class="bn-input"
+                           value="{{ old('sort_order', $isEdit ? $editingBanner->sort_order : 0) }}">
+                </div>
+                <div>
+                    <label class="bn-check">
+                        <input type="checkbox" name="is_active" value="1"
+                               {{ old('is_active', $isEdit ? $editingBanner->is_active : 1) ? 'checked' : '' }}>
+                        <span>Hiển thị trên trang chủ</span>
+                    </label>
+                </div>
+            </div>
 
-    <table border="1" cellpadding="8" cellspacing="0" width="100%" style="border-collapse: collapse;">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Ảnh</th>
-                <th>Badge & Tiêu đề</th>
-                <th>Thứ tự</th>
-                <th>Trạng thái</th>
-                <th>Thao tác</th>
-            </tr>
-        </thead>
-        <tbody>
-            @forelse($banners as $banner)
+            <button type="submit" class="bn-btn-primary">
+                {{ $isEdit ? 'Cập nhật Banner' : 'Lưu Banner' }}
+            </button>
+        </form>
+    </div>
+
+    <div class="bn-card" style="padding: 0; overflow-x: auto;">
+        <table class="bn-table">
+            <thead>
                 <tr>
-                    <td>{{ $banner->id }}</td>
-                    <td>
-                        @if($banner->image)
-                            <img src="{{ asset('storage/' . $banner->image) }}" alt="{{ $banner->title }}" style="height: 55px; width: 90px; object-fit: cover;">
-                        @else
-                            Không có ảnh
-                        @endif
-                    </td>
-                    <td>
-                        @if($banner->badge_text)
-                            <div style="font-size: 12px; color: #555;">{{ $banner->badge_text }}</div>
-                        @endif
-                        <strong>{{ $banner->title }}</strong>
-                        @if($banner->description)
-                            <div style="font-size: 13px; color: #666; margin-top: 4px;">{{ $banner->description }}</div>
-                        @endif
-                    </td>
-                    <td>{{ $banner->sort_order }}</td>
-                    <td>{{ $banner->is_active ? 'Đang bật' : 'Tắt' }}</td>
-                    <td>
-                        <form action="{{ route('admin.banners.destroy', $banner) }}" method="POST" onsubmit="return confirm('Xóa banner này?');">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" style="padding: 4px 10px; cursor: pointer;">Xóa</button>
-                        </form>
-                    </td>
+                    <th style="width: 60px;">ID</th>
+                    <th style="width: 100px;">Ảnh</th>
+                    <th>Badge & Tiêu đề</th>
+                    <th style="width: 85px;">Thứ tự</th>
+                    <th style="width: 115px;">Trạng thái</th>
+                    <th style="width: 130px;">Thao tác</th>
                 </tr>
-            @empty
-                <tr>
-                    <td colspan="6" style="text-align: center;">Chưa có banner nào.</td>
-                </tr>
-            @endforelse
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @forelse($banners as $banner)
+                    <tr>
+                        <td>{{ $banner->id }}</td>
+                        <td>
+                            @if($banner->image)
+                                <img src="{{ asset('storage/' . $banner->image) }}" alt="{{ $banner->title }}"
+                                     style="width: 72px; height: 48px; object-fit: cover; border-radius: 4px;">
+                            @endif
+                        </td>
+                        <td>
+                            @if($banner->badge_text)
+                                <div style="font-size: 12px; color: #64748b;">{{ $banner->badge_text }}</div>
+                            @endif
+                            <div style="font-weight: 700; color: #0f172a;">{{ $banner->title }}</div>
+                            @if($banner->description)
+                                <div style="font-size: 13px; color: #475569; margin-top: 2px;">{{ $banner->description }}</div>
+                            @endif
+                        </td>
+                        <td>{{ $banner->sort_order }}</td>
+                        <td>
+                            @if($banner->is_active)
+                                <span class="bn-badge-on">Đang bật</span>
+                            @else
+                                <span class="bn-badge-off">Tắt</span>
+                            @endif
+                        </td>
+                        <td>
+                            <div class="bn-actions">
+                                <a href="{{ route('admin.banners.edit', $banner) }}" class="bn-btn-edit">Sửa</a>
+                                <form action="{{ route('admin.banners.destroy', $banner) }}" method="POST"
+                                      onsubmit="return confirm('Xóa banner này?');">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="bn-btn-del">Xóa</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                @empty
+                    <tr>
+                        <td colspan="6" style="text-align: center; color: #64748b; padding: 26px;">Chưa có banner nào.</td>
+                    </tr>
+                @endforelse
+            </tbody>
+        </table>
+    </div>
 </div>
 @endsection

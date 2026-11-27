@@ -65,9 +65,10 @@
             </nav> -->
             <nav class="mt-4 px-3 space-y-1">
     <!-- Tổng quan -->
-    <a href="/admin/banners" class="flex items-center px-3 py-2.5 text-sm font-medium rounded-lg transition {{ request()->is('admin/dashboard') ? 'bg-navyLight text-gold' : 'text-gray-300 hover:bg-navyLight hover:text-white' }}">
+    <a href="/admin/banners" class="flex items-center px-3 py-2.5 text-sm font-medium rounded-lg transition {{ request()->is('admin/banners') ? 'bg-navyLight text-gold' : 'text-gray-300 hover:bg-navyLight hover:text-white' }}">
         <i class="fas fa-chart-line w-6"></i> BANNER trang chủ
-
+    <a href="/admin/hero-highlights" class="flex items-center px-3 py-2.5 text-sm font-medium rounded-lg transition {{ request()->is('admin/hero-highlights') ? 'bg-navyLight text-gold' : 'text-gray-300 hover:bg-navyLight hover:text-white' }}">
+        <i class="fas fa-chart-line w-6"></i> Iconic trang chủ
     <!-- Thông tin công ty -->
     <a href="/admin/company-info" class="flex items-center px-3 py-2.5 text-sm font-medium rounded-lg transition {{ request()->is('admin/company-info*') ? 'bg-navyLight text-gold' : 'text-gray-300 hover:bg-navyLight hover:text-white' }}">
         <i class="fas fa-building w-6"></i> Thông tin công ty

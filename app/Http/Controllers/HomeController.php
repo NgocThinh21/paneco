@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Banner;
 use App\Models\CompanyInfo;
+use App\Models\HeroHighlight;
 use App\Models\Project;
 
 class HomeController extends Controller
@@ -22,8 +23,9 @@ class HomeController extends Controller
             ->latest()
             ->take(6)
             ->get();
-        $heroHighlights = \App\Models\HeroHighlight::where('is_active', true)
+        $heroHighlights = HeroHighlight::where('is_active', true)
             ->orderBy('sort_order')
+            ->latest()
             ->get();
 
         return view('welcome', compact('info', 'banners', 'heroHighlights', 'featuredProjects'));

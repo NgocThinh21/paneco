@@ -352,6 +352,25 @@
     @endif
 
     <!-- 3. GIÁ TRỊ CỐT LÕI (3 CỘT) -->
+     @if($heroHighlights->count())
+    <section class="py-5 bg-light" style="margin-top: -40px; position: relative; z-index: 2; background: transparent !important;">
+        <div class="container">
+            <div class="row g-4">
+                @foreach($heroHighlights as $item)
+                    <div class="col-md-4">
+                        <div class="value-card">
+                            <div class="value-icon"><i class="{{ $item->icon }}"></i></div>
+                            <h4 class="fw-bold text-dark">{{ $item->title }}</h4>
+                            @if($item->subtitle)
+                                <p class="text-muted mb-0">{{ $item->subtitle }}</p>
+                            @endif
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </section>
+@endif
      <!-- @if($heroHighlights->count())
     <div class="col-lg-4 mt-4 mt-lg-0">
         <div class="d-flex flex-column gap-3">

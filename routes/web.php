@@ -16,11 +16,12 @@ Route::get('/login', function () {
 });
 
 // ADMIN
+
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::resource('info', CompanyInfoController::class);
     Route::resource('projects', ProjectController::class);
-    Route::resource('banners', BannerController::class)->only(['index', 'store', 'destroy']);
-    Route::resource('hero-highlights', HeroHighlightController::class)->only(['index', 'store', 'destroy']);
+    Route::resource('banners', BannerController::class)->only(['index', 'store', 'edit', 'update', 'destroy']);
+    Route::resource('hero-highlights', HeroHighlightController::class)->only(['index', 'store', 'edit', 'update', 'destroy']);
 });
 
 
