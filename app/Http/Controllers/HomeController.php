@@ -29,7 +29,6 @@ class HomeController extends Controller
             ->get();
 
         return view('welcome', compact('info', 'banners', 'heroHighlights', 'featuredProjects'));
-        // return view('welcome', compact('info', 'banners', 'featuredProjects'));
     }
 }
 
