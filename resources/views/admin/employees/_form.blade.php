@@ -39,6 +39,8 @@
         </div>
     </div>
     <label class="flex items-center gap-2 text-sm font-semibold"><input name="is_visible" type="checkbox" value="1" @checked(old('is_visible', $employee->exists ? $employee->is_visible : true))> Hiển thị hồ sơ này trên website</label>
+    <label class="flex items-center gap-2 rounded-lg border border-amber-200 bg-amber-50 p-4 text-sm font-semibold text-slate-800"><input name="is_featured" type="checkbox" value="1" @checked(old('is_featured', $employee->exists ? $employee->is_featured : false))> Hiển thị nổi bật trên Trang chủ <span class="font-normal text-slate-600">(tối đa 8 thành viên)</span></label>
+    @error('is_featured')<p class="-mt-3 text-sm text-red-600">{{ $message }}</p>@enderror
     <div class="flex flex-wrap gap-3">
         <button class="rounded bg-slate-900 px-5 py-3 font-semibold text-white hover:bg-slate-700" type="submit">{{ $isEditing ? 'Lưu thay đổi' : 'Thêm thành viên' }}</button>
         <a class="rounded bg-slate-200 px-5 py-3 font-semibold text-slate-700 hover:bg-slate-300" href="{{ route('admin.employees.index') }}">Quay lại danh sách</a>

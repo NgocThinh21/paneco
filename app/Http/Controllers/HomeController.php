@@ -24,8 +24,10 @@ class HomeController extends Controller
         $info = CompanyInfo::first();
         $employees = Employee::query()
             ->where('is_visible', true)
+            ->where('is_featured', true)
             ->orderBy('sort_order')
             ->orderBy('id')
+            ->limit(8)
             ->get();
 
         $banners = Banner::query()->where('is_active', true)->orderBy('sort_order')->get();
@@ -48,8 +50,21 @@ class HomeController extends Controller
     public function team(): View
     {
         $info = CompanyInfo::query()->first();
-        $employees = Employee::query()->where('is_visible', true)->orderBy('sort_order')->orderBy('id')->get();
+        $departments = Employee::query()
+            ->where('is_visible', true)
+            ->whereNotNull('department')
+            ->where('department', '<>', '')
+            ->distinct()
+            ->orderBy('department')
+            ->pluck('department');
+        $department = request()->query('department');
+        $employees = Employee::query()
+            ->where('is_visible', true)
+            ->when($department, fn ($query) => $query->where('department', $department))
+            ->orderBy('sort_order')
+            ->orderBy('id')
+            ->get();
 
-        return view('team', compact('info', 'employees'));
+        return view('team', compact('info', 'employees', 'departments', 'department'));
     }
 }

@@ -15,7 +15,7 @@
     <div class="overflow-x-auto rounded-lg border border-slate-200 bg-white shadow-sm">
         <table class="w-full min-w-[720px] text-left text-sm">
             <thead class="bg-slate-50 text-slate-600">
-                <tr><th class="px-4 py-3">Thành viên</th><th class="px-4 py-3">Chức vụ</th><th class="px-4 py-3">Phòng ban</th><th class="px-4 py-3">Thứ tự</th><th class="px-4 py-3">Hiển thị</th><th class="px-4 py-3">Thao tác</th></tr>
+                <tr><th class="px-4 py-3">Thành viên</th><th class="px-4 py-3">Chức vụ</th><th class="px-4 py-3">Phòng ban</th><th class="px-4 py-3">Thứ tự</th><th class="px-4 py-3">Nổi bật Trang chủ</th><th class="px-4 py-3">Hiển thị</th><th class="px-4 py-3">Thao tác</th></tr>
             </thead>
             <tbody class="divide-y divide-slate-100">
                 @forelse ($employees as $employee)
@@ -24,6 +24,17 @@
                         <td class="px-4 py-3">{{ $employee->position }}</td>
                         <td class="px-4 py-3">{{ $employee->department ?: '—' }}</td>
                         <td class="px-4 py-3">{{ $employee->sort_order }}</td>
+                        <td class="px-4 py-3">
+                            <form action="{{ route('admin.employees.featured', $employee) }}" method="POST">
+                                @csrf
+                                @method('PATCH')
+                                <input type="hidden" name="is_featured" value="0">
+                                <label class="inline-flex cursor-pointer items-center gap-2">
+                                    <input class="rounded border-slate-300 text-amber-500 focus:ring-amber-500" type="checkbox" name="is_featured" value="1" @checked($employee->is_featured) onchange="this.form.submit()" aria-label="Hiển thị {{ $employee->full_name }} nổi bật trên Trang chủ">
+                                    <span>{{ $employee->is_featured ? 'Đang bật' : 'Đang tắt' }}</span>
+                                </label>
+                            </form>
+                        </td>
                         <td class="px-4 py-3">{{ $employee->is_visible ? 'Đang hiện' : 'Đang ẩn' }}</td>
                         <td class="flex gap-3 px-4 py-3">
                             <a class="font-semibold text-blue-700 hover:underline" href="{{ route('admin.employees.edit', $employee) }}">Sửa</a>
@@ -35,7 +46,7 @@
                         </td>
                     </tr>
                 @empty
-                    <tr><td class="px-4 py-8 text-center text-slate-500" colspan="6">Chưa có hồ sơ thành viên. Hãy nhập thông tin thật do Paneco cung cấp.</td></tr>
+                    <tr><td class="px-4 py-8 text-center text-slate-500" colspan="7">Chưa có hồ sơ thành viên. Hãy nhập thông tin thật do Paneco cung cấp.</td></tr>
                 @endforelse
             </tbody>
         </table>

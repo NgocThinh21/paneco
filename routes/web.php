@@ -36,6 +36,7 @@ Route::post('/contact', [PublicContactController::class, 'store'])
 Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     Route::get('info', [CompanyInfoController::class, 'index'])->name('info.index');
     Route::put('info', [CompanyInfoController::class, 'update'])->name('info.update');
+    Route::patch('employees/{employee}/featured', [EmployeeController::class, 'updateFeatured'])->name('employees.featured');
     Route::resource('employees', EmployeeController::class)->except(['show']);
     Route::resource('banners', BannerController::class)->only(['index', 'store', 'edit', 'update', 'destroy']);
     Route::resource('hero-highlights', HeroHighlightController::class)->only(['index', 'store', 'edit', 'update', 'destroy']);

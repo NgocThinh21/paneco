@@ -20,13 +20,25 @@
 <main>
     @php($hero=$banners->first())
     <section class="hero" id="home" @if($hero?->image) style="background-image:linear-gradient(110deg,#0a2540eb,#1b365dc9),url('{{ asset('storage/'.$hero->image) }}')" @endif><div class="container">
-        <div class="eyebrow mb-3">{{ $hero?->badge_text ?: 'Paneco · Việt Nam' }}</div><h1>{{ $hero?->title ?: ($info?->slogan ?: 'Triển khai bản vẽ kỹ thuật cho dự án Nhật Bản') }}</h1>
+        <div class="eyebrow mb-3">@if($hero?->badge_icon)<i class="{{ $hero->badge_icon }} me-2" aria-hidden="true"></i>@endif{{ $hero?->badge_text ?: 'Paneco · Việt Nam' }}</div><h1>{{ $hero?->title ?: ($info?->slogan ?: 'Triển khai bản vẽ kỹ thuật cho dự án Nhật Bản') }}</h1>
         <p class="lead mt-3 mb-4">{{ $hero?->description ?: ($info?->greeting ?: 'Paneco hoạt động tại Việt Nam, tiếp nhận dự án từ Nhật Bản và triển khai bản vẽ Shop Drawing, bản vẽ chi tiết gia công theo tài liệu thiết kế đầu vào.') }}</p>
         <a class="button-amber me-2" href="{{ $hero?->button1_link ?: '#services' }}">{{ $hero?->button1_text ?: 'Khám phá dịch vụ' }}</a><a class="button-outline" href="{{ $hero?->button2_link ?: '#contact' }}">{{ $hero?->button2_text ?: 'Liên hệ Paneco' }}</a>
-        @unless($hero)<div class="mt-4"><span class="demo-note"><i class="bi bi-pencil-square"></i> Nội dung mẫu — cập nhật trong Admin</span></div>@endunless
+        @unless($hero)
+        <!-- <div class="mt-4">
+            <span class="demo-note">
+                <i class="bi bi-pencil-square"></i>
+                 Nội dung mẫu — cập nhật trong Admin
+                </span></div> -->
+                @endunless
     </div></section>
     @if($heroHighlights->isNotEmpty())<section class="py-4 section-muted"><div class="container"><div class="row g-3">@foreach($heroHighlights as $item)<div class="col-sm-6 col-lg-3"><div class="tile"><i class="bi {{ $item->icon }} tile-icon"></i><h3 class="h6 fw-bold mt-3">{{ $item->title }}</h3><p class="small text-secondary mb-0">{{ $item->subtitle }}</p></div></div>@endforeach</div></div></section>@endif
-    <section class="section" id="about"><div class="container"><div class="row align-items-center g-5"><div class="col-lg-6"><div class="eyebrow">Về Paneco</div><h2 class="section-title mt-2">{{ $info?->name_vi ?: 'Đồng hành triển khai bản vẽ kỹ thuật' }}</h2><p class="section-lead">{{ $info?->mission ?: 'Paneco tại Việt Nam phối hợp triển khai bản vẽ Shop Drawing và bản vẽ chi tiết gia công dựa trên tài liệu thiết kế của dự án Nhật Bản.' }}</p>@if($info?->vision)<h3 class="h5 mt-4">Định hướng</h3><p class="text-secondary">{{ $info->vision }}</p>@endif @if(! $info?->mission)<span class="demo-note">Nội dung giới thiệu mẫu — sửa trong Admin</span>@endif</div><div class="col-lg-6">@if($info?->about_image)<img class="w-100 rounded-3 shadow-sm" style="max-height:370px;object-fit:cover" src="{{ asset('storage/'.$info->about_image) }}" alt="Giới thiệu Paneco">@else<div class="rounded-3 d-grid text-center p-5" style="min-height:280px;place-content:center;background:linear-gradient(135deg,#e8eef2,#c9d9e1);color:var(--navy)"><i class="bi bi-rulers display-3"></i><div class="mt-3 fw-semibold">Ảnh giới thiệu công ty<br><small class="fw-normal">Tải ảnh lên Admin</small></div></div>@endif</div></div>
+    <section class="section" id="about">
+        <div class="container"><div class="row align-items-center g-5">
+            <div class="col-lg-6"><div class="eyebrow">Về Paneco</div>
+            <h2 class="section-title mt-2">{{ $info?->name_vi ?: 'Đồng hành triển khai bản vẽ kỹ thuật' }}</h2>
+            <p class="section-lead">{{ $info?->mission ?: 'Paneco tại Việt Nam phối hợp triển khai bản vẽ Shop Drawing và bản vẽ chi tiết gia công dựa trên tài liệu thiết kế của dự án Nhật Bản.' }}</p>@if($info?->vision)<h3 class="h5 mt-4">Định hướng</h3><p class="text-secondary">{{ $info->vision }}</p>@endif @if(! $info?->mission)
+    <!-- <span class="demo-note">Nội dung giới thiệu mẫu — sửa trong Admin</span> -->
+    @endif</div><div class="col-lg-6">@if($info?->about_image)<img class="w-100 rounded-3 shadow-sm" style="max-height:370px;object-fit:cover" src="{{ asset('storage/'.$info->about_image) }}" alt="Giới thiệu Paneco">@else<div class="rounded-3 d-grid text-center p-5" style="min-height:280px;place-content:center;background:linear-gradient(135deg,#e8eef2,#c9d9e1);color:var(--navy)"><i class="bi bi-rulers display-3"></i><div class="mt-3 fw-semibold">Ảnh giới thiệu công ty<br><small class="fw-normal">Tải ảnh lên Admin</small></div></div>@endif</div></div>
     @if($coreValues->isNotEmpty())<div class="row g-3 mt-4">@foreach($coreValues as $value)<div class="col-md-4"><div class="tile"><i class="bi {{ $value->icon ?: 'bi-check-circle' }} tile-icon"></i><h3 class="h6 fw-bold mt-3">{{ $value->title }}</h3><p class="text-secondary small mb-0">{{ $value->description }}</p></div></div>@endforeach</div>@endif</div></section>
     <section class="section section-muted" id="services"><div class="container"><div class="text-center mb-5"><div class="eyebrow">Năng lực triển khai</div><h2 class="section-title">Dịch vụ của Paneco</h2><p class="section-lead mx-auto">Cập nhật phạm vi dịch vụ thực tế trong Admin trước khi công bố.</p></div><div class="row g-4">
         @forelse($services as $service)<div class="col-md-6 col-lg-4"><article class="tile"><i class="bi {{ $service->icon ?: 'bi-vector-pen' }} tile-icon"></i><h3 class="h5 fw-bold mt-3">{{ $service->title }}</h3><p class="text-secondary mb-0">{{ $service->description }}</p></article></div>
@@ -36,10 +48,41 @@
         @forelse($projects as $project)<div class="col-md-6 col-lg-4"><article class="tile p-0">@if($project->thumbnail)<img class="w-100" style="height:210px;object-fit:cover" src="{{ asset('storage/'.$project->thumbnail) }}" alt="{{ $project->title }}" loading="lazy">@else<div class="d-grid" style="height:210px;place-items:center;background:#e8eef2;color:var(--blue);font-size:3rem"><i class="bi bi-buildings"></i></div>@endif<div class="card-copy"><span class="demo-note">{{ $project->category==='steel'?'Kết cấu thép':'BIM' }} · {{ $project->year }}</span><h3 class="h5 fw-bold mt-3">{{ $project->title }}</h3><p class="text-secondary">{{ $project->work_detail }}</p><p class="small text-secondary mb-0">{{ $project->description }}</p></div></article></div>
         @empty @foreach([['Bản vẽ Shop Drawing','photo-1504307651254-35680f356dfd'],['Bản vẽ chi tiết gia công','photo-1581092921461-eab62e97a780'],['Triển khai hồ sơ kỹ thuật','photo-1581092160562-40aa08e78837']] as [$title,$image])<div class="col-md-6 col-lg-4"><article class="tile p-0"><img class="w-100" style="height:210px;object-fit:cover" src="https://images.unsplash.com/{{ $image }}?auto=format&fit=crop&w=900&q=80" alt="Hình minh họa {{ $title }}" loading="lazy"><div class="card-copy"><span class="demo-note">Dữ liệu và ảnh minh họa</span><h3 class="h5 fw-bold mt-3">{{ $title }}</h3><p class="text-secondary mb-0">Thay bằng dự án Paneco được phép công bố tại Admin.</p></div></article></div>@endforeach @endforelse
     </div></div></section>
-    <section class="section section-muted" id="team"><div class="container"><div class="text-center mb-5"><div class="eyebrow">Con người Paneco</div><h2 class="section-title">Đội ngũ 23 thành viên</h2><p class="section-lead mx-auto">Hồ sơ giới thiệu thành viên được quản lý trong Admin.</p></div>
-        @if($employees->isNotEmpty())<div class="team-grid">@foreach($employees as $employee)<article class="person-card">@if($employee->photo)<img class="person-photo" src="{{ asset('storage/'.$employee->photo) }}" alt="Ảnh {{ $employee->full_name }}" loading="lazy">@else<div class="person-avatar">{{ \Illuminate\Support\Str::substr($employee->full_name,0,1) }}</div>@endif<div class="card-copy"><h3 class="h6 fw-bold mb-1">{{ $employee->full_name }}</h3><p class="small fw-semibold mb-1" style="color:var(--blue)">{{ $employee->position }}</p>@if($employee->department)<p class="small text-secondary mb-0">{{ $employee->department }}</p>@endif</div></article>@endforeach</div>
-        @else<div class="team-grid">@for($member=1;$member<=23;$member++)<article class="person-card text-center"><div class="person-avatar">{{ sprintf('%02d',$member) }}</div><div class="card-copy"><div class="fw-bold">Thành viên {{ sprintf('%02d',$member) }}</div><div class="small text-secondary">Thông tin minh họa</div></div></article>@endfor</div><p class="text-center mt-4"><span class="demo-note">Thay tên, chức danh, ảnh bằng hồ sơ được Paneco duyệt trong Admin</span></p>@endif
-    </div></section>
+    <section class="section section-muted" id="team">
+        <div class="container">
+            <div class="text-center mb-5">
+                <div class="eyebrow">Con người Paneco</div>
+                <h2 class="section-title">Đội ngũ nổi bật</h2>
+                <p class="section-lead mx-auto">Những kỹ sư và chuyên gia đang đồng hành cùng các dự án của Paneco.</p>
+            </div>
+            @if($employees->isNotEmpty())
+                <div class="team-grid">
+                    @foreach($employees as $employee)
+                        <article class="person-card">
+                            @if($employee->photo)
+                                <img class="person-photo" src="{{ asset('storage/'.$employee->photo) }}" alt="Ảnh {{ $employee->full_name }}" loading="lazy">
+                            @else
+                                <div class="person-avatar">{{ \Illuminate\Support\Str::upper(\Illuminate\Support\Str::substr($employee->full_name, 0, 1)) }}</div>
+                            @endif
+                            <div class="card-copy">
+                                <h3 class="h6 fw-bold mb-1">{{ $employee->full_name }}</h3>
+                                <p class="small fw-semibold mb-1" style="color:var(--blue)">{{ $employee->position }}</p>
+                                @if($employee->department)
+                                    <p class="small text-secondary mb-2">{{ $employee->department }}</p>
+                                @endif
+                                @if($employee->bio)
+                                    <p class="small text-secondary mb-0">{{ $employee->bio }}</p>
+                                @endif
+                            </div>
+                        </article>
+                    @endforeach
+                </div>
+            @else
+                <div class="rounded-3 border bg-white p-4 text-center text-secondary">Chưa có thành viên nổi bật được chọn. Hãy bật lựa chọn này trong Admin.</div>
+            @endif
+            <div class="text-center mt-4"><a class="button-amber" href="{{ route('team') }}">Xem tất cả 23 thành viên <i class="bi bi-arrow-right ms-1"></i></a></div>
+        </div>
+    </section>
     @if($recruitments->isNotEmpty() || $news->isNotEmpty())<section class="section" id="news"><div class="container"><div class="row g-5"><div class="col-lg-6"><div class="eyebrow">Cơ hội nghề nghiệp</div><h2 class="section-title mb-4">Tuyển dụng</h2>@forelse($recruitments as $job)<article class="tile mb-3"><span class="badge text-bg-success">Đang tuyển</span><h3 class="h5 fw-bold mt-3">{{ $job->title }}</h3><p class="text-secondary">{{ $job->location }} @if($job->quantity)· {{ $job->quantity }} vị trí@endif</p><p class="mb-0">{{ $job->description }}</p></article>@empty<p>Hiện chưa có vị trí tuyển dụng.</p>@endforelse</div><div class="col-lg-6"><div class="eyebrow">Cập nhật</div><h2 class="section-title mb-4">Tin tức</h2>@forelse($news as $article)<article class="tile mb-3"><small class="text-secondary">{{ $article->published_at?->format('d/m/Y') }}</small><h3 class="h5 fw-bold mt-2">{{ $article->title }}</h3><p class="mb-0 text-secondary">{{ $article->summary }}</p></article>@empty<p>Chưa có bài viết.</p>@endforelse</div></div></div></section>@endif
     @if($partners->isNotEmpty())<section class="section section-muted"><div class="container text-center"><div class="eyebrow">Kết nối</div><h2 class="section-title mb-4">Khách hàng và đối tác</h2><div class="d-flex justify-content-center flex-wrap gap-4">@foreach($partners as $partner)<div class="p-3 bg-white rounded-3 border">@if($partner->logo)<img src="{{ asset('storage/'.$partner->logo) }}" alt="{{ $partner->name }}" style="max-width:150px;max-height:70px;object-fit:contain">@else<strong>{{ $partner->name }}</strong>@endif</div>@endforeach</div></div></section>@endif
     @if($gallery->isNotEmpty())<section class="section" id="gallery"><div class="container text-center"><div class="eyebrow">Hình ảnh</div><h2 class="section-title mb-4">Thư viện hình ảnh</h2><div class="row g-3">@foreach($gallery as $image)<div class="col-6 col-md-4 col-lg-3"><img src="{{ asset('storage/'.$image) }}" alt="Hình ảnh Paneco" class="w-100 rounded-3" style="height:190px;object-fit:cover" loading="lazy"></div>@endforeach</div></div></section>@endif

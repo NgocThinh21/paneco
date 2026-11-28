@@ -16,6 +16,7 @@ class Employee extends Model
         'photo',
         'sort_order',
         'is_visible',
+        'is_featured',
     ];
 
     protected function casts(): array
@@ -24,6 +25,7 @@ class Employee extends Model
             'years_experience' => 'integer',
             'sort_order' => 'integer',
             'is_visible' => 'boolean',
+            'is_featured' => 'boolean',
         ];
     }
 }

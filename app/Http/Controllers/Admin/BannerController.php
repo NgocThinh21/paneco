@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Banner;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rule;
 
 class BannerController extends Controller
 {
@@ -76,6 +77,18 @@ class BannerController extends Controller
     {
         return $request->validate([
             'badge_text'   => 'nullable|string|max:255',
+            'badge_icon'   => ['nullable', Rule::in([
+                'bi bi-buildings', 'bi bi-building-gear', 'bi bi-building-check',
+                'bi bi-gear-wide-connected', 'bi bi-tools', 'bi bi-hammer',
+                'bi bi-rulers', 'bi bi-pencil-ruler', 'bi bi-compass',
+                'bi bi-drafting-compass', 'bi bi-diagram-3', 'bi bi-people',
+                'bi bi-person-badge', 'bi bi-award', 'bi bi-patch-check',
+                'bi bi-shield-check', 'bi bi-check-circle', 'bi bi-stars',
+                'bi bi-lightbulb', 'bi bi-cpu', 'bi bi-globe-asia-australia',
+                'bi bi-briefcase', 'bi bi-calendar-check', 'bi bi-chat-dots',
+                'bi bi-envelope-paper', 'bi bi-truck', 'bi bi-house-gear',
+                'bi bi-wrench-adjustable', 'bi bi-boxes', 'bi bi-bounding-box-circles',
+            ])],
             'title'        => 'required|string|max:255',
             'description'  => 'nullable|string',
             'image'        => 'nullable|image|max:5120',
