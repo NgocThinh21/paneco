@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Đăng Nhập Quản Trị - PANECO.VN</title>
+    <title>Đăng nhập quản trị - PANECO.VN</title>
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap Icons -->
@@ -69,31 +69,36 @@
         </div>
         
         <div class="card-body p-4">
-            <!-- Form xử lý đăng nhập (Sau này trỏ route POST vào đây) -->
-            <form action="#" method="POST">
+            @if ($errors->any())
+                <div class="alert alert-danger" role="alert">
+                    {{ $errors->first() }}
+                </div>
+            @endif
+
+            <form action="{{ route('login.store') }}" method="POST">
                 @csrf
                 <div class="mb-3">
-                    <label class="form-label fw-semibold small text-secondary">Tên đăng nhập hoặc Email</label>
+                    <label for="email" class="form-label fw-semibold small text-secondary">Email</label>
                     <div class="input-group">
                         <span class="input-group-text bg-light"><i class="bi bi-person-fill"></i></span>
-                        <input type="email" class="form-control" name="email" placeholder="admin@paneco.vn" required>
+                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" placeholder="admin@paneco.vn" autocomplete="username" required autofocus>
                     </div>
                 </div>
 
                 <div class="mb-4">
-                    <label class="form-label fw-semibold small text-secondary">Mật khẩu</label>
+                    <label for="password" class="form-label fw-semibold small text-secondary">Mật khẩu</label>
                     <div class="input-group">
                         <span class="input-group-text bg-light"><i class="bi bi-lock-fill"></i></span>
-                        <input type="password" class="form-control" name="password" placeholder="••••••••" required>
+                        <input id="password" type="password" class="form-control" name="password" placeholder="••••••••" autocomplete="current-password" required>
                     </div>
                 </div>
 
                 <div class="d-flex justify-content-between align-items-center mb-4 small">
                     <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="remember">
+                        <input type="checkbox" class="form-check-input" id="remember" name="remember" value="1">
                         <label class="form-check-label text-muted" for="remember">Ghi nhớ đăng nhập</label>
                     </div>
-                    <a href="#" class="text-decoration-none text-primary">Quên mật khẩu?</a>
+                    <span class="text-muted">Dành cho quản trị viên</span>
                 </div>
 
                 <button type="submit" class="btn btn-amber w-100 py-2 mb-3">

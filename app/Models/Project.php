@@ -6,14 +6,23 @@ use Illuminate\Database\Eloquent\Model;
 
 class Project extends Model
 {
-    // Khai báo các cột được phép thêm/sửa dữ liệu
     protected $fillable = [
-        'name',
+        'title',
+        'slug',
         'category',
         'year',
+        'scale_value',
+        'scale_unit',
         'work_detail',
-        'scale',
-        'image',
-        'is_featured'
+        'software',
+        'description',
+        'thumbnail',
+        'is_featured',
+        'is_visible',
     ];
+
+    protected function casts(): array
+    {
+        return ['is_featured' => 'boolean', 'is_visible' => 'boolean'];
+    }
 }

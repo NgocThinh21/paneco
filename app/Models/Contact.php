@@ -6,5 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Contact extends Model
 {
-    //
+    protected $fillable = ['full_name', 'phone', 'email', 'purpose', 'message', 'is_read'];
+
+    protected function casts(): array
+    {
+        return ['is_read' => 'boolean'];
+    }
 }

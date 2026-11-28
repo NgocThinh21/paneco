@@ -6,5 +6,24 @@ use Illuminate\Database\Eloquent\Model;
 
 class Employee extends Model
 {
-    //
+    protected $fillable = [
+        'full_name',
+        'position',
+        'department',
+        'years_experience',
+        'software_skills',
+        'bio',
+        'photo',
+        'sort_order',
+        'is_visible',
+    ];
+
+    protected function casts(): array
+    {
+        return [
+            'years_experience' => 'integer',
+            'sort_order' => 'integer',
+            'is_visible' => 'boolean',
+        ];
+    }
 }

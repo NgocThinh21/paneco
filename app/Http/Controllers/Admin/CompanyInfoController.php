@@ -4,17 +4,20 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\CompanyInfo;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class CompanyInfoController extends Controller
 {
-    public function index()
+    public function index(): View
     {
-        $info = CompanyInfo::first() ?? new CompanyInfo();
-        return view('admin.info.index', compact('info'));
+        $info = CompanyInfo::first() ?? new CompanyInfo;
+
+        return view('admin.info.form', compact('info'));
     }
 
-    public function update(Request $request)
+    public function update(Request $request): RedirectResponse
     {
         $data = $request->validate([
             'name_vi' => 'required|string|max:255',
@@ -31,12 +34,23 @@ class CompanyInfoController extends Controller
             'vision' => 'nullable|string',
             'mission' => 'nullable|string',
             'zalo_link' => 'nullable|string|max:255',
+            'logo' => 'nullable|image|max:2048',
+            'about_image' => 'nullable|image|max:5120',
         ]);
 
-        $info = CompanyInfo::first() ?? new CompanyInfo();
+        $info = CompanyInfo::first() ?? new CompanyInfo;
+
+        foreach (['logo', 'about_image'] as $imageField) {
+            if ($request->hasFile($imageField)) {
+                $data[$imageField] = $request->file($imageField)->store('company', 'public');
+            } else {
+                unset($data[$imageField]);
+            }
+        }
+
         $info->fill($data);
         $info->save();
 
-        return redirect()->route('admin.info.index')->with('success', 'Đã lưu thông tin trang chủ/công ty.');
+        return redirect()->route('admin.info.index')->with('success', 'Đã lưu thông tin công ty.');
     }
 }
